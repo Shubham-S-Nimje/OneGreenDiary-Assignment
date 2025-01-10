@@ -13,6 +13,7 @@ const Task = require("./models/task");
 
 // importing routes
 const authRoutes = require("./routes/authRoutes");
+const projectsRoutes = require("./routes/projectsRoutes");
 
 dotenv.config();
 const { PORT } = process.env;
@@ -30,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api", authRoutes);
+app.use("/api/projects", projectsRoutes);
 
 // table relationships
 // User.hasMany(Project);
