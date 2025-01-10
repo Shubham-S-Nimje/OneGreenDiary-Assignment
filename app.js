@@ -11,6 +11,9 @@ const User = require("./models/user");
 const Project = require("./models/project");
 const Task = require("./models/task");
 
+// importing routes
+const authRoutes = require("./routes/authRoutes");
+
 dotenv.config();
 const { PORT } = process.env;
 
@@ -25,9 +28,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Routes
+app.use("/api", authRoutes);
+
 // table relationships
-User.hasMany(Project);
-Project.belongsTo(User);
+// User.hasMany(Project);
+// Project.belongsTo(User);
+User.belongsToMany(Project, { through: "UserProjects" });
+Project.belongsToMany(User, { through: "UserProjects" });
 
 Project.hasMany(Task);
 Task.belongsTo(Project);
