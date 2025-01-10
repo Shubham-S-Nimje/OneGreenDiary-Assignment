@@ -1,10 +1,13 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { JWT_SECRET } = process.env;
 
 //generate token
 const generateToken = (userDetails) => {
-  return jwt.sign(userDetails, process.env.JWT_SECRET, {
+  // console.log(JWT_SECRET);
+  // console.log(userDetails);
+  return jwt.sign(userDetails, JWT_SECRET, {
     expiresIn: "24h",
   });
 };
@@ -36,7 +39,7 @@ exports.register = async (req, res) => {
     // console.log(user);
 
     const token = generateToken({
-      userId: user.userId,
+      userId: user.id,
       name: user.name,
       email: user.email,
     });
@@ -81,7 +84,11 @@ exports.login = async (req, res) => {
 
     await user.update({ lastLogin: new Date() });
 
-    const token = generateToken({ userId: user.userId });
+    const token = generateToken({
+      userId: user.id,
+      name: user.name,
+      email: user.email,
+    });
     // console.log(token);
 
     res.json({
@@ -94,5 +101,23 @@ exports.login = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+};
+
+//user logout
+exports.logout = async (req, res) => {
+  try {
+    res.status(200).json({
+      status: 200,
+      data: null,
+      message: "User logged out successfully.",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 400,
+      data: null,
+      message: "Bad Request",
+      error: error.message,
+    });
   }
 };
