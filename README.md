@@ -1,1 +1,1 @@
-# OneGreenDiary-Assignment
+# OneGreenDiary Assignment
