@@ -6,6 +6,11 @@ const csp = require("./config/csp");
 const corsOptions = require("./config/corsOption");
 const sequelize = require("./utils/database");
 
+// importing modals
+const User = require("./models/user");
+const Project = require("./models/project");
+const Task = require("./models/task");
+
 dotenv.config();
 const { PORT } = process.env;
 
@@ -19,6 +24,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// table relationships
+User.hasMany(Project);
+Project.belongsTo(User);
+
+Project.hasMany(Task);
+Task.belongsTo(Project);
 
 // db connection and to start server
 sequelize
