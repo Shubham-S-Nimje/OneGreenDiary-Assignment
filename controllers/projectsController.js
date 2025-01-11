@@ -5,6 +5,7 @@ const User = require("../models/user");
 exports.newProject = async (req, res) => {
   try {
     const { name, description } = req.body;
+    const UserId = req.user.id;
 
     const project = await Project.findOne({ where: { name } });
     if (project) {
@@ -16,10 +17,25 @@ exports.newProject = async (req, res) => {
       });
     }
 
-    await Project.create({
+    const newProject = await Project.create({
       name,
       description,
     });
+
+    // await UserProjects.create({ UserId, ProjectId: project.id });
+    const user = await User.findByPk(UserId);
+    // console.log(user);
+
+    if (!user) {
+      return res.status(404).json({
+        status: 404,
+        data: null,
+        message: "User not found",
+        error: null,
+      });
+    }
+
+    await newProject.addUser(user);
 
     res.status(201).json({
       status: 201,
@@ -103,6 +119,8 @@ exports.updateProject = async (req, res) => {
     const { name, description } = req.body;
     const userId = req.user.id;
 
+    // console.log(id, userId);
+
     const project = await Project.findOne({
       where: { id },
       include: [
@@ -114,8 +132,9 @@ exports.updateProject = async (req, res) => {
       ],
     });
 
-    // console.log(project.Users[0].id, userId);
+    console.log(project, userId);
 
+    // console.log(project);
     if (!project) {
       return res.status(404).json({
         status: 404,
@@ -138,6 +157,7 @@ exports.updateProject = async (req, res) => {
     // if (description) project.description = description;
 
     const updatedProject = await project.update({ name, description });
+    console.log(updatedProject);
 
     res.status(200).json({
       status: 200,

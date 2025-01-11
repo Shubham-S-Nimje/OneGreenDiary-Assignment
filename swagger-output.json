@@ -7,9 +7,7 @@
   },
   "host": "localhost:4000",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/api/register": {
       "post": {
@@ -35,14 +33,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
+          "200": {
+            "description": "User registered successfully"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Email already registered"
+          },
+          "400": {
+            "description": "Name, email, and password are required fields. or Bad Request"
           }
         }
       }
@@ -69,16 +67,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Login successful"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Email, and password are required fields. or Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
+            "description": "Invalid credentials"
           }
         }
       }
@@ -95,13 +90,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User logged out successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           }
         }
       }
@@ -118,16 +113,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "projects fetched successfully."
           },
           "400": {
             "description": "Bad Request"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "404": {
-            "description": "Not Found"
+            "description": "projects not found."
+          },
+          "401": {
+            "description": "Unauthorized Access"
           }
         }
       }
@@ -159,16 +154,16 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Project created successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Project name already exist"
           }
         }
       }
@@ -191,16 +186,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "project retrieved successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Not Found"
+            "description": "project not found."
           }
         }
       },
@@ -236,19 +231,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "project updated successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "Unauthorized user"
           },
           "404": {
-            "description": "Not Found"
+            "description": "project not found."
           }
         }
       },
@@ -269,19 +264,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "project deleted successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "Unauthorized user"
           },
           "404": {
-            "description": "Not Found"
+            "description": "project not found."
           }
         }
       }
@@ -298,16 +293,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "task fetched successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Not Found"
+            "description": "task not found."
           }
         }
       }
@@ -330,16 +325,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "task retrieved successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Not Found"
+            "description": "task not found."
           }
         }
       },
@@ -378,16 +373,16 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "task created successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Not Found"
+            "description": "task name already exist"
           }
         }
       }
@@ -422,16 +417,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "task updated successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Not Found"
+            "description": "wrong status"
           }
         }
       },
@@ -452,16 +447,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "task deleted successfully."
           },
           "400": {
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized Access"
           },
           "404": {
-            "description": "Not Found"
+            "description": "task not found."
           }
         }
       }

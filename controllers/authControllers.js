@@ -19,13 +19,14 @@ exports.register = async (req, res) => {
 
     if (!name || !email || !password) {
       return res
-        .status(404)
+        .status(400)
         .json({ error: "Name, email, and password are required fields." });
     }
 
     const existingUser = await User.findOne({ where: { email } });
+    console.log(name, email, password, existingUser);
     if (existingUser) {
-      return res.status(400).json({ error: "Email already registered" });
+      return res.status(404).json({ error: "Email already registered" });
     }
 
     // hashing password
@@ -38,24 +39,24 @@ exports.register = async (req, res) => {
     });
     // console.log(user);
 
-    const token = generateToken({
-      userId: user.id,
-      name: user.name,
-      email: user.email,
-    });
+    // const token = generateToken({
+    //   userId: user.id,
+    //   name: user.name,
+    //   email: user.email,
+    // });
     // console.log(token);
 
-    res.status(201).json({
+    res.status(200).json({
       message: "User registered successfully",
       user: {
         userId: user.userId,
         name: user.name,
         email: user.email,
       },
-      token,
+      // token,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: "Bad Request" });
   }
 };
 
@@ -66,7 +67,7 @@ exports.login = async (req, res) => {
 
     if (!email || !password) {
       return res
-        .status(404)
+        .status(400)
         .json({ error: "Email, and password are required fields." });
     }
 
@@ -91,7 +92,7 @@ exports.login = async (req, res) => {
     });
     // console.log(token);
 
-    res.json({
+    res.status(200).json({
       message: "Login successful",
       user: {
         name: user.name,
@@ -100,7 +101,7 @@ exports.login = async (req, res) => {
       token,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: "Bad Request" });
   }
 };
 
