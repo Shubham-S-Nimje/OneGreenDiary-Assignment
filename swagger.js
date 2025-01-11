@@ -8,8 +8,8 @@ const { PORT } = process.env;
 
 const doc = {
   info: {
-    title: "My API",
-    description: "Description",
+    title: "Project Management API",
+    description: "API documentation for Project Management System",
   },
   host: `localhost:${PORT || 4000}`,
 };
@@ -17,9 +17,9 @@ const doc = {
 const outputFile = "./swagger-output.json";
 const routes = [
   "./app.js",
-  "./routes/authRoutes.js",
-  "./routes/projectsRoutes.js",
-  "./routes/tasksRoutes.js",
+  // "./routes/authRoutes.js",
+  // "./routes/projectsRoutes.js",
+  // "./routes/tasksRoutes.js",
 ];
 
 /* NOTE: If you are using the express Router, you must pass in the 'routes' only the 
