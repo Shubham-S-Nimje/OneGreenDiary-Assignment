@@ -5,7 +5,7 @@
     "description": "API documentation for Project Management System",
     "version": "1.0.0"
   },
-  "host": "localhost:4000",
+  "host": "one-green-diary-assignment.onrender.com",
   "basePath": "/",
   "schemes": ["http", "https"],
   "paths": {
